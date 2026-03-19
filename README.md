@@ -1,47 +1,38 @@
-# karolis.com
+# karolis.uk
 
-Personal portfolio site for Karolis Zaksauskas — Front-End Developer based in Aberdeen, Scotland.
+Personal portfolio site for Karolis Zaksauskas, a front-end developer based in Aberdeen, Scotland.
 
 ## Tech Stack
 
-- **Tailwind CSS** via CDN
-- **Vanilla JavaScript** — no frameworks, no build step
-- **Inter + JetBrains Mono** — Google Fonts
+- Tailwind CSS via CDN
+- Vanilla JavaScript with no build step
+- Inter and JetBrains Mono via Google Fonts
 
 ## Features
 
-- Letter-by-letter name reveal (Splitting.js-inspired)
-- Rotating code window with syntax-highlighted snippets (Twig, GSAP, CSS, Alpine.js)
-- 3D card tilt with cursor-tracking spotlight
+- Letter-by-letter hero name reveal
+- Rotating code window with syntax-highlighted snippets
+- 3D project card tilt with spotlight effect
 - Word-by-word heading reveals on scroll
-- CountUp number animations
-- Staggered skill tag reveals
-- Active navigation highlighting via IntersectionObserver
-- Aurora gradient + dot grid hero background
-- Responsive with mobile menu
-- Full favicon set, OG tags, Twitter card, JSON-LD schema
+- Count-up stats and staggered skill tag reveals
+- Active navigation highlighting with IntersectionObserver
+- Responsive mobile menu
+- SEO metadata, favicons, sitemap, and structured data
 
-## File Structure
+## Files
 
-```
-karolis.com/
-├── index.html
-├── karolis.jpg
-├── favicon.svg
-├── favicon.ico
-├── favicon-96x96.png
-├── apple-touch-icon.png
-├── web-app-manifest-192x192.png
-├── web-app-manifest-512x512.png
-├── site.webmanifest
-├── robots.txt
-└── sitemap.xml
-```
+- `index.html` contains the full site
+- `karolis.jpg` is the profile image
+- `site.webmanifest`, `robots.txt`, `sitemap.xml`, and `CNAME` support deployment and SEO
+- favicon and manifest PNG/SVG assets support browser and device icons
 
-## Deploy
+## Deployment
 
-Static site — no build step required. Drop it on Netlify, Vercel, Cloudflare Pages, or GitHub Pages.
+This is a static site and can be deployed directly from the repository root with GitHub Pages.
 
-## Performance
+For `karolis.uk` on GitHub Pages:
 
-Total site weight: ~136KB. Single HTML file, one optimised image, zero dependencies.
+- Keep `CNAME` set to `karolis.uk`
+- Point the apex domain at GitHub Pages A records
+- Point `www` to `Karolis-Zak.github.io`
+- Enable GitHub Pages for the repository and then enable HTTPS

@@ -55,7 +55,7 @@
         ],
         "sameAs": [
             "https://www.linkedin.com/in/Karolis-Z",
-            "https://github.com/KarolisZak"
+            "https://github.com/Karolis-Zak"
         ]
     }
     </script>
@@ -322,6 +322,28 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(6px); }
         }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .split-char,
+            .hero-subtitle,
+            .hero-cta,
+            .hero-badge,
+            .hero-photo,
+            .hero-scroll,
+            .hero-code,
+            .fade-in,
+            .stagger-child,
+            .reveal-words .word-inner {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-neutral-950 text-neutral-300 font-sans antialiased">
@@ -336,13 +358,13 @@
                 <a href="#work" class="nav-link hover:text-white transition-colors" data-section="work">Work</a>
                 <a href="#contact" class="nav-link hover:text-white transition-colors" data-section="contact">Contact</a>
             </div>
-            <button id="menu-toggle" class="sm:hidden text-neutral-400 hover:text-white transition-colors" aria-label="Toggle menu">
+            <button id="menu-toggle" class="sm:hidden text-neutral-400 hover:text-white transition-colors" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden sm:hidden border-t border-white/5 bg-neutral-950/95 backdrop-blur-md">
+        <div id="mobile-menu" class="hidden sm:hidden border-t border-white/5 bg-neutral-950/95 backdrop-blur-md" hidden>
             <div class="px-6 py-4 flex flex-col gap-4 text-sm text-neutral-400">
                 <a href="#about" class="hover:text-white transition-colors py-1">About</a>
                 <a href="#skills" class="hover:text-white transition-colors py-1">Skills</a>
@@ -668,7 +690,7 @@
                 <a href="https://www.linkedin.com/in/Karolis-Z" target="_blank" rel="noopener" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
                     LinkedIn
                 </a>
-                <a href="https://github.com/KarolisZak" target="_blank" rel="noopener" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
+                <a href="https://github.com/Karolis-Zak" target="_blank" rel="noopener" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
                     GitHub
                 </a>
             </div>
@@ -685,11 +707,17 @@
     </footer>
 
     <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         // ==============================
         // 1. SPLITTING.JS-STYLE LETTER REVEAL
         // ==============================
         function splitAndAnimate(elementId, text, baseDelay) {
             const el = document.getElementById(elementId);
+            if (prefersReducedMotion) {
+                el.textContent = text;
+                return;
+            }
             text.split('').forEach((char, i) => {
                 const span = document.createElement('span');
                 span.className = 'split-char';
@@ -775,13 +803,18 @@
             currentSnippet = (currentSnippet + 1) % codeSnippets.length;
         }
         // Initial render after hero animation completes
-        setTimeout(renderCode, 1400);
-        setInterval(renderCode, 4000);
+        if (prefersReducedMotion) {
+            renderCode();
+        } else {
+            setTimeout(renderCode, 1400);
+            setInterval(renderCode, 4000);
+        }
 
         // ==============================
         // 3. 3D CARD TILT + SPOTLIGHT
         // ==============================
         document.querySelectorAll('.card').forEach(card => {
+            if (prefersReducedMotion) return;
             const shine = card.querySelector('.card-shine');
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -805,6 +838,7 @@
         // 4. WORD-BY-WORD REVEAL ON SCROLL
         // ==============================
         document.querySelectorAll('.reveal-words').forEach(el => {
+            if (prefersReducedMotion) return;
             const text = el.textContent.trim();
             el.textContent = '';
             text.split(' ').forEach((word, i) => {
@@ -825,6 +859,10 @@
         function animateCountUp(el) {
             const target = parseInt(el.dataset.target);
             const suffix = target === 0 ? '' : '+';
+            if (prefersReducedMotion) {
+                el.textContent = target.toLocaleString() + suffix;
+                return;
+            }
             const duration = 1500;
             const start = performance.now();
             function update(now) {
@@ -884,9 +922,21 @@
         // ==============================
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        function setMobileMenuState(isOpen) {
+            mobileMenu.classList.toggle('hidden', !isOpen);
+            mobileMenu.hidden = !isOpen;
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        setMobileMenuState(false);
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+            setMobileMenuState(!isOpen);
+        });
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            link.addEventListener('click', () => setMobileMenuState(false));
         });
 
         // ==============================
