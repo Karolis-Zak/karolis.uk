@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://karolis.com/sitemap.xml
+Sitemap: https://karolis.uk/sitemap.xml
