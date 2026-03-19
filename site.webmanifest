@@ -1,6 +1,10 @@
 {
   "name": "Karolis Zaksauskas",
   "short_name": "Karolis",
+  "description": "Portfolio site of Karolis Zaksauskas, a front-end developer based in Aberdeen, Scotland.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
