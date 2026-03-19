@@ -1,0 +1,20 @@
+# Karolis Zaksauskas
+> Personal site and portfolio for Karolis Zaksauskas.
+
+## Summary
+Karolis Zaksauskas is a front-end developer based in Aberdeen, Scotland. Originally from Lithuania, he speaks both English and Lithuanian. His website is https://karolis.uk/.
+
+## Canonical Facts
+- Full name: Karolis Zaksauskas
+- Website: https://karolis.uk/
+- Job title: Front-End Developer
+- Employer: Mission10
+- Location: Aberdeen, Scotland
+- Languages: English, Lithuanian
+- Education: Robert Gordon University, BSc (Hons) in Computing, 2024
+- Email: mailto:Kzaksauskasss@gmail.com
+- LinkedIn: https://www.linkedin.com/in/Karolis-Z
+- GitHub: https://github.com/Karolis-Zak
+
+## Key Link
+https://karolis.uk/
