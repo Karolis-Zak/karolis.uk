@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karolis Zaksauskas | Front-End Developer</title>
+    <meta name="description" content="Front-End Developer based in Aberdeen, Scotland. Building performant, maintainable web experiences.">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="canonical" href="https://karolis.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Karolis Zaksauskas | Front-End Developer">
+    <meta property="og:description" content="Front-end developer across 40+ live projects. Crafting interactive, performant web experiences from Aberdeen, Scotland.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://karolis.com/">
+    <meta property="og:image" content="https://karolis.com/karolis.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Karolis Zaksauskas | Front-End Developer">
+    <meta name="twitter:description" content="Front-end developer across 40+ live projects. Crafting interactive, performant web experiences from Aberdeen, Scotland.">
+    <meta name="twitter:image" content="https://karolis.com/karolis.jpg">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Karolis Zaksauskas",
+        "url": "https://karolis.com",
+        "image": "https://karolis.com/karolis.jpg",
+        "jobTitle": "Front-End Developer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Mission10",
+            "url": "https://mission10.co.uk"
+        },
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Robert Gordon University"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Aberdeen",
+            "addressCountry": "GB"
+        },
+        "knowsAbout": [
+            "JavaScript", "HTML", "CSS", "PHP", "Tailwind CSS", "Alpine.js",
+            "GSAP", "Vue.js", "React", "Craft CMS", "WordPress", "Vite",
+            "Git", "GitHub Actions", "AWS", "Docker"
+        ],
+        "sameAs": [
+            "https://www.linkedin.com/in/Karolis-Z",
+            "https://github.com/KarolisZak"
+        ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwindcss.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ---- Hero aurora gradient ---- */
+        .hero-aurora {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .hero-aurora::before,
+        .hero-aurora::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: aurora 12s ease-in-out infinite alternate;
+        }
+        .hero-aurora::before {
+            width: 500px;
+            height: 500px;
+            background: rgba(96, 165, 250, 0.12);
+            top: 20%;
+            left: 15%;
+        }
+        .hero-aurora::after {
+            width: 400px;
+            height: 400px;
+            background: rgba(167, 139, 250, 0.1);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: -6s;
+        }
+        @keyframes aurora {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.1); }
+            100% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 100%);
+        }
+
+        /* ---- Hero text letter reveal (Splitting.js style) ---- */
+        .split-text {
+            display: inline-flex;
+            overflow: hidden;
+        }
+        .split-char {
+            display: inline-block;
+            transform: translateY(110%);
+            opacity: 0;
+            animation: charReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes charReveal {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero-subtitle { opacity: 0; animation: fadeUp 0.6s ease forwards 0.8s; }
+        .hero-cta { opacity: 0; animation: fadeUp 0.6s ease forwards 1s; }
+        .hero-badge { opacity: 0; animation: fadeUp 0.4s ease forwards 0.1s; }
+        .hero-photo { opacity: 0; animation: fadeUp 0.6s ease forwards 0.15s; }
+        .hero-scroll { opacity: 0; animation: fadeUp 0.6s ease forwards 1.2s; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- Code window ---- */
+        .code-window {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+        .code-window-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .code-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .code-window-bar span {
+            margin-left: auto;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.03em;
+        }
+        .code-body {
+            padding: 14px 16px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+        .code-body .hl-tag { color: #60a5fa; }
+        .code-body .hl-attr { color: #a78bfa; }
+        .code-body .hl-str { color: #34d399; }
+        .code-body .hl-comment { color: rgba(255, 255, 255, 0.15); font-style: italic; }
+        .code-body .hl-key { color: #f472b6; }
+        .code-body .hl-fn { color: #fbbf24; }
+        .code-line {
+            opacity: 0;
+            animation: codeFade 0.3s ease forwards;
+        }
+        @keyframes codeFade {
+            to { opacity: 1; }
+        }
+        .hero-code { opacity: 0; animation: fadeUp 0.6s ease forwards 1.3s; }
+
+        /* ---- Cards with 3D tilt ---- */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .card .card-shine {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .card:hover .card-shine {
+            opacity: 1;
+        }
+
+        /* ---- Skill tags ---- */
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .skill-tag:hover {
+            border-color: rgba(96, 165, 250, 0.4);
+            background: rgba(96, 165, 250, 0.08);
+        }
+        .skill-tag.core {
+            border-color: rgba(96, 165, 250, 0.2);
+            background: rgba(96, 165, 250, 0.06);
+            color: #fff;
+        }
+        .result-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 12px;
+            padding-top: 12px;
+        }
+
+        /* ---- Sector tags ---- */
+        .sector-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .sector-property { background: rgba(251,191,36,0.1); color: #fbbf24; }
+        .sector-energy { background: rgba(52,211,153,0.1); color: #34d399; }
+        .sector-tooling { background: rgba(96,165,250,0.1); color: #60a5fa; }
+        .sector-tech { background: rgba(167,139,250,0.1); color: #a78bfa; }
+
+        /* ---- Word-by-word reveal on scroll ---- */
+        .reveal-words .word {
+            display: inline-block;
+            overflow: hidden;
+            margin-right: 0.25em;
+        }
+        .reveal-words .word-inner {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+        .reveal-words.revealed .word-inner {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ---- CountUp stats ---- */
+        .stat-number { font-variant-numeric: tabular-nums; }
+
+        /* ---- Fade in on scroll ---- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-child {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .stagger-child.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- Nav active ---- */
+        .nav-link.active { color: #fff; }
+        .nav-link.active::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #60a5fa;
+            border-radius: 1px;
+            margin-top: 4px;
+        }
+
+        /* ---- Scrollbar ---- */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
+        section[id] { scroll-margin-top: 80px; }
+
+        /* ---- Scroll indicator ---- */
+        .scroll-indicator { animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-300 font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="font-mono text-white font-medium tracking-tight text-base">karolis<span class="text-blue-400 font-bold">/</span>z</a>
+            <div class="hidden sm:flex items-center gap-8 text-sm text-neutral-400">
+                <a href="#about" class="nav-link hover:text-white transition-colors" data-section="about">About</a>
+                <a href="#skills" class="nav-link hover:text-white transition-colors" data-section="skills">Skills</a>
+                <a href="#work" class="nav-link hover:text-white transition-colors" data-section="work">Work</a>
+                <a href="#contact" class="nav-link hover:text-white transition-colors" data-section="contact">Contact</a>
+            </div>
+            <button id="menu-toggle" class="sm:hidden text-neutral-400 hover:text-white transition-colors" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden sm:hidden border-t border-white/5 bg-neutral-950/95 backdrop-blur-md">
+            <div class="px-6 py-4 flex flex-col gap-4 text-sm text-neutral-400">
+                <a href="#about" class="hover:text-white transition-colors py-1">About</a>
+                <a href="#skills" class="hover:text-white transition-colors py-1">Skills</a>
+                <a href="#work" class="hover:text-white transition-colors py-1">Work</a>
+                <a href="#contact" class="hover:text-white transition-colors py-1">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+        <div class="hero-aurora"></div>
+        <div class="hero-grid"></div>
+
+        <div class="max-w-6xl w-full relative z-10">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 lg:gap-16">
+                <!-- Left side: photo, name, subtitle, CTAs -->
+                <div class="flex-1">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-10 mb-8">
+                        <div class="hero-photo shrink-0">
+                            <img src="karolis.jpg" alt="Karolis Zaksauskas" class="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl object-cover border-2 border-white/10 shadow-lg shadow-blue-500/5">
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <p class="hero-badge font-mono text-sm text-blue-400 mb-4 tracking-wider">Front-End Developer</p>
+                            <h1 class="text-5xl sm:text-7xl font-bold text-white leading-[1.1] mb-2 tracking-tight">
+                                <span class="split-text" id="name-first"></span>
+                            </h1>
+                            <h1 class="text-5xl sm:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                                <span class="split-text" id="name-last"></span>
+                            </h1>
+                        </div>
+                    </div>
+
+                    <p class="hero-subtitle text-lg sm:text-xl text-neutral-400 max-w-xl leading-relaxed mb-8 text-center sm:text-left">
+                        Front-end developer across 40+ live projects from interactive SVG maps and
+                        scroll-driven animations to SEO schema implementation and CI/CD pipelines. Based in Aberdeen, Scotland.
+                    </p>
+
+                    <div class="hero-cta flex items-center justify-center sm:justify-start gap-4 sm:gap-6">
+                        <a href="#work" class="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium rounded-lg transition-colors">
+                            View my work
+                        </a>
+                        <a href="#contact" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
+                            Get in touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right side: code window -->
+                <div class="hero-code shrink-0 hidden lg:block">
+                    <div class="code-window" id="code-window">
+                        <div class="code-window-bar">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <span id="code-filename">component.twig</span>
+                        </div>
+                        <div class="code-body" id="code-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#about" class="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 hover:text-neutral-400 transition-colors">
+            <svg class="w-5 h-5 text-neutral-600 scroll-indicator" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 sm:py-32 px-6">
+        <div class="max-w-3xl mx-auto fade-in">
+            <p class="font-mono text-sm text-blue-400 mb-4 tracking-wider">01 / About</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8 tracking-tight reveal-words">A bit about me</h2>
+            <div class="space-y-5 text-neutral-400 leading-relaxed text-lg">
+                <p>
+                    I'm a Front-End Developer at Mission10, a digital agency in Aberdeen, where I serve as the sole
+                    front-end specialist across 40+ live client projects. I handle everything from initial architecture
+                    and build through to production deployment and ongoing maintenance.
+                </p>
+                <p>
+                    My clients span Oil & Gas, property, legal, and energy sectors including names like
+                    Dolphin Drilling, Port of Aberdeen, Kirkwood Homes, and SES Energy. I've built full front-end
+                    systems from scratch, created reusable component libraries, and managed CMS and infrastructure
+                    upgrades across production environments with zero downtime.
+                </p>
+                <p>
+                    Beyond the day-to-day, I've built custom performance plugins targeting Core Web Vitals,
+                    implemented structured data and Google AI schema for SEO, and established
+                    code quality standards with linting, testing, and pre-commit hooks across the agency.
+                </p>
+                <p>
+                    I graduated from Robert Gordon University in 2024 with a BSc (Hons) in Computing.
+                    I'm always exploring new tools and technologies to improve how I build things.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-trigger grid grid-cols-2 sm:grid-cols-4 gap-6 mt-14 pt-10 border-t border-white/5">
+                <div class="text-center sm:text-left">
+                    <p class="stat-number text-3xl sm:text-4xl font-bold text-white" data-target="40">0</p>
+                    <p class="text-sm text-neutral-500 mt-1">Live projects</p>
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="stat-number text-3xl sm:text-4xl font-bold text-white" data-target="500">0</p>
+                    <p class="text-sm text-neutral-500 mt-1">Content blocks built</p>
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="stat-number text-3xl sm:text-4xl font-bold text-white" data-target="1500">0</p>
+                    <p class="text-sm text-neutral-500 mt-1">Reusable components</p>
+                </div>
+                <div class="text-center sm:text-left">
+                    <p class="stat-number text-3xl sm:text-4xl font-bold text-white" data-target="0">0</p>
+                    <p class="text-sm text-neutral-500 mt-1">Downtime on upgrades</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-24 sm:py-32 px-6 border-t border-white/5">
+        <div class="max-w-3xl mx-auto fade-in">
+            <p class="font-mono text-sm text-blue-400 mb-4 tracking-wider">02 / Skills</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 tracking-tight reveal-words">What I work with</h2>
+
+            <div class="space-y-10">
+                <div>
+                    <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">Languages</h3>
+                    <p class="text-sm text-neutral-600 mb-4">The core languages I write every day to build websites</p>
+                    <div class="flex flex-wrap gap-2 stagger-group">
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">JavaScript (ES6+)</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">HTML5</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">CSS3 / SCSS</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">PHP</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">Frameworks & Libraries</h3>
+                    <p class="text-sm text-neutral-600 mb-4">Tools for styling, animations, search, and interactive UI</p>
+                    <div class="flex flex-wrap gap-2 stagger-group">
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Tailwind CSS</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Alpine.js</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">GSAP</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Algolia</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Swiper</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Lenis</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Vue.js</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">React</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Leaflet.js</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">CMS & Backend</h3>
+                    <p class="text-sm text-neutral-600 mb-4">Content management systems and server-side platforms I build on</p>
+                    <div class="flex flex-wrap gap-2 stagger-group">
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Craft CMS</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Twig</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">WordPress</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Node.js</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">AI-Assisted Development</h3>
+                    <p class="text-sm text-neutral-600 mb-4">AI tools integrated into my daily workflow for faster, smarter development</p>
+                    <div class="flex flex-wrap gap-2 stagger-group">
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Claude Code</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">GitHub Copilot</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Codex</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Workflow Optimisation</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-1">Tools & Infrastructure</h3>
+                    <p class="text-sm text-neutral-600 mb-4">Build tools, version control, deployment, testing, and code quality</p>
+                    <div class="flex flex-wrap gap-2 stagger-group">
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Git</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">Vite</span>
+                        <span class="skill-tag core stagger-child px-4 py-2 rounded-lg text-sm">GitHub Actions</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Docker / DDEV</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Webpack</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">AWS (EB / S3 / CloudFront)</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">ESLint / Stylelint / Prettier</span>
+                        <span class="skill-tag stagger-child px-4 py-2 rounded-lg text-sm text-neutral-300">Vitest / Pest</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="py-24 sm:py-32 px-6 border-t border-white/5">
+        <div class="max-w-3xl mx-auto fade-in">
+            <p class="font-mono text-sm text-blue-400 mb-4 tracking-wider">03 / Work</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 tracking-tight reveal-words">Selected projects</h2>
+
+            <div class="space-y-6">
+
+                <a href="https://kirkwoodhomes.co.uk" target="_blank" rel="noopener" class="card block rounded-xl p-6 sm:p-8 group relative overflow-hidden">
+                    <div class="card-shine"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">Kirkwood Homes</h3>
+                                <span class="sector-tag sector-property">Property</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500 shrink-0">Craft CMS / Tailwind / GSAP</span>
+                        </div>
+                        <p class="text-neutral-400 leading-relaxed mt-3">
+                            Full front-end build for a leading Scottish homebuilder. Interactive SVG site plans
+                            with plot and housetype pickers, Algolia-powered multi-faceted property search,
+                            GSAP scroll animations, PDF flipbook viewer, and JSON-LD structured data for listings.
+                        </p>
+                        <p class="result-line text-sm text-neutral-500">
+                            <span class="text-blue-400 font-medium">Result:</span> Replaced static PDF site plans with interactive SVG maps, enabling buyers to browse, filter, and click into individual plots directly improving engagement and reducing sales enquiry friction.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="https://dolphindrilling.com" target="_blank" rel="noopener" class="card block rounded-xl p-6 sm:p-8 group relative overflow-hidden">
+                    <div class="card-shine"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">Dolphin Drilling</h3>
+                                <span class="sector-tag sector-energy">Oil & Gas</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500 shrink-0">Craft CMS / Leaflet.js / React</span>
+                        </div>
+                        <p class="text-neutral-400 leading-relaxed mt-3">
+                            Corporate website for a global offshore drilling company. Leaflet.js interactive maps,
+                            fleet and asset directory, careers section, people profiles with modal views,
+                            timeline components, and a Bower-to-npm build migration.
+                        </p>
+                        <p class="result-line text-sm text-neutral-500">
+                            <span class="text-blue-400 font-medium">Result:</span> Migrated legacy Bower-based build system to npm, eliminating deprecated dependencies and modernising the development workflow for long-term maintainability.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="https://fennex.net" target="_blank" rel="noopener" class="card block rounded-xl p-6 sm:p-8 group relative overflow-hidden">
+                    <div class="card-shine"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">Fennex</h3>
+                                <span class="sector-tag sector-tech">Technology</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500 shrink-0">Craft CMS / Vite / Tailwind</span>
+                        </div>
+                        <p class="text-neutral-400 leading-relaxed mt-3">
+                            Large-scale front-end build with an extensive component library. GSAP + ScrollTrigger
+                            animations, Splitting.js text reveals, CountUp number animations, bento grid layouts,
+                            resource hub with search and pagination, and Swiper-based story sliders.
+                        </p>
+                        <p class="result-line text-sm text-neutral-500">
+                            <span class="text-blue-400 font-medium">Result:</span> Delivered the agency's most animation-rich site with a reusable component system that made adding new pages fast and consistent across the project.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="https://elecsys.co" target="_blank" rel="noopener" class="card block rounded-xl p-6 sm:p-8 group relative overflow-hidden">
+                    <div class="card-shine"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition-colors">Elecsys</h3>
+                                <span class="sector-tag sector-energy">Engineering</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500 shrink-0">Craft CMS / Vite / Alpine.js</span>
+                        </div>
+                        <p class="text-neutral-400 leading-relaxed mt-3">
+                            Full front-end build for an electrical engineering firm. Modern Vite-based build pipeline,
+                            Google AI schema implementation, structured heading hierarchy for SEO,
+                            comprehensive linting with Husky pre-commit hooks, and DDEV local development setup.
+                        </p>
+                        <p class="result-line text-sm text-neutral-500">
+                            <span class="text-blue-400 font-medium">Result:</span> Built with strict code quality standards from day one ESLint, Stylelint, twig-cs-fixer, and pre-commit hooks setting the benchmark for how the agency approaches new projects.
+                        </p>
+                    </div>
+                </a>
+
+                <div class="card rounded-xl p-6 sm:p-8 relative overflow-hidden">
+                    <div class="card-shine"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-3">
+                                <h3 class="text-xl font-semibold text-white">Craft CMS Boilerplate</h3>
+                                <span class="sector-tag sector-tooling">Internal</span>
+                            </div>
+                            <span class="font-mono text-xs text-neutral-500 shrink-0">Craft 5 / Vite / Vitest</span>
+                        </div>
+                        <p class="text-neutral-400 leading-relaxed mt-3">
+                            Internal agency starter with 70+ Twig content blocks, CI/CD deployment to AWS Elastic Beanstalk,
+                            unit testing with Vitest, and comprehensive code quality tooling. Used as the foundation for all new projects.
+                        </p>
+                        <p class="result-line text-sm text-neutral-500">
+                            <span class="text-blue-400 font-medium">Result:</span> Standardised how every new project starts reducing initial build time, enforcing code quality from day one, and ensuring consistent delivery across the agency.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 sm:py-32 px-6 border-t border-white/5">
+        <div class="max-w-3xl mx-auto text-center fade-in">
+            <p class="font-mono text-sm text-blue-400 mb-4 tracking-wider">04 / Contact</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight reveal-words">Let's talk</h2>
+            <p class="text-neutral-400 text-lg mb-10 max-w-lg mx-auto">
+                I'm currently open to new opportunities. If you'd like to work together or just say hello, get in touch.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="mailto:Kzaksauskasss@gmail.com" class="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium rounded-lg transition-colors">
+                    Kzaksauskasss@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/Karolis-Z" target="_blank" rel="noopener" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
+                    LinkedIn
+                </a>
+                <a href="https://github.com/KarolisZak" target="_blank" rel="noopener" class="px-6 py-3 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors">
+                    GitHub
+                </a>
+            </div>
+            <p class="text-neutral-600 text-sm">Based in Aberdeen, Scotland</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-white/5">
+        <div class="max-w-3xl mx-auto flex items-center justify-between text-xs text-neutral-600">
+            <span>&copy; 2026 Karolis Zaksauskas</span>
+            <a href="#" class="hover:text-neutral-400 transition-colors">Back to top</a>
+        </div>
+    </footer>
+
+    <script>
+        // ==============================
+        // 1. SPLITTING.JS-STYLE LETTER REVEAL
+        // ==============================
+        function splitAndAnimate(elementId, text, baseDelay) {
+            const el = document.getElementById(elementId);
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'split-char';
+                span.style.animationDelay = `${baseDelay + i * 0.04}s`;
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                el.appendChild(span);
+            });
+        }
+        splitAndAnimate('name-first', 'Karolis', 0.2);
+        splitAndAnimate('name-last', 'Zaksauskas', 0.35);
+
+        // ==============================
+        // 2. CODE WINDOW ROTATION
+        // ==============================
+        const codeSnippets = [
+            {
+                file: 'component.twig',
+                lines: [
+                    '<span class="hl-comment">{# Hero content block #}</span>',
+                    '<span class="hl-tag">{% block</span> <span class="hl-attr">content</span> <span class="hl-tag">%}</span>',
+                    '  &lt;<span class="hl-tag">section</span> <span class="hl-attr">class</span>=<span class="hl-str">"hero"</span>&gt;',
+                    '    &lt;<span class="hl-tag">h1</span>&gt;{{ <span class="hl-attr">entry.heading</span> }}&lt;/<span class="hl-tag">h1</span>&gt;',
+                    '    &lt;<span class="hl-tag">p</span>&gt;{{ <span class="hl-attr">entry.subline</span> }}&lt;/<span class="hl-tag">p</span>&gt;',
+                    '  &lt;/<span class="hl-tag">section</span>&gt;',
+                    '<span class="hl-tag">{% endblock %}</span>',
+                ]
+            },
+            {
+                file: 'animation.js',
+                lines: [
+                    '<span class="hl-key">import</span> { gsap, ScrollTrigger } <span class="hl-key">from</span> <span class="hl-str">"./gsap"</span>',
+                    '<span class="hl-key">import</span> Splitting <span class="hl-key">from</span> <span class="hl-str">"splitting"</span>',
+                    '',
+                    '<span class="hl-key">const</span> results = <span class="hl-fn">Splitting</span>({ <span class="hl-attr">by</span>: <span class="hl-str">"words"</span> })',
+                    '',
+                    'gsap.<span class="hl-fn">to</span>(words, {',
+                    '  <span class="hl-attr">yPercent</span>: <span class="hl-str">0</span>, <span class="hl-attr">stagger</span>: <span class="hl-str">0.05</span>,',
+                    '  <span class="hl-attr">ease</span>: <span class="hl-str">"power2.out"</span>',
+                    '})',
+                ]
+            },
+            {
+                file: 'styles.css',
+                lines: [
+                    '<span class="hl-tag">.card</span> {',
+                    '  <span class="hl-attr">@apply</span> <span class="hl-str">rounded-xl p-8</span>;',
+                    '  <span class="hl-attr">background</span>: <span class="hl-fn">rgba</span>(<span class="hl-str">255,255,255,0.03</span>);',
+                    '  <span class="hl-attr">border</span>: <span class="hl-str">1px solid</span> <span class="hl-fn">rgba</span>(<span class="hl-str">255,255,255,0.06</span>);',
+                    '  <span class="hl-attr">transition</span>: <span class="hl-str">all 0.3s ease</span>;',
+                    '}',
+                ]
+            },
+            {
+                file: 'search.html',
+                lines: [
+                    '&lt;<span class="hl-tag">div</span> <span class="hl-attr">x-data</span>=<span class="hl-str">"{ open: false, query: \'\' }"</span>&gt;',
+                    '  &lt;<span class="hl-tag">input</span>',
+                    '    <span class="hl-attr">x-model</span>=<span class="hl-str">"query"</span>',
+                    '    <span class="hl-attr">@focus</span>=<span class="hl-str">"open = true"</span>',
+                    '    <span class="hl-attr">placeholder</span>=<span class="hl-str">"Search plots..."</span>',
+                    '  /&gt;',
+                    '  &lt;<span class="hl-tag">div</span> <span class="hl-attr">x-show</span>=<span class="hl-str">"open"</span> <span class="hl-attr">x-transition</span>&gt;',
+                    '    <span class="hl-comment">&lt;!-- Algolia results --&gt;</span>',
+                    '  &lt;/<span class="hl-tag">div</span>&gt;',
+                    '&lt;/<span class="hl-tag">div</span>&gt;',
+                ]
+            },
+        ];
+
+        let currentSnippet = 0;
+        function renderCode() {
+            const snippet = codeSnippets[currentSnippet];
+            document.getElementById('code-filename').textContent = snippet.file;
+            const body = document.getElementById('code-body');
+            body.innerHTML = '';
+            snippet.lines.forEach((line, i) => {
+                const div = document.createElement('div');
+                div.className = 'code-line';
+                div.style.animationDelay = `${i * 0.08}s`;
+                div.innerHTML = line || '&nbsp;';
+                body.appendChild(div);
+            });
+            currentSnippet = (currentSnippet + 1) % codeSnippets.length;
+        }
+        // Initial render after hero animation completes
+        setTimeout(renderCode, 1400);
+        setInterval(renderCode, 4000);
+
+        // ==============================
+        // 3. 3D CARD TILT + SPOTLIGHT
+        // ==============================
+        document.querySelectorAll('.card').forEach(card => {
+            const shine = card.querySelector('.card-shine');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / centerY * -4;
+                const rotateY = (x - centerX) / centerX * 4;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+                if (shine) {
+                    shine.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(96,165,250,0.06) 0%, transparent 60%)`;
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // ==============================
+        // 4. WORD-BY-WORD REVEAL ON SCROLL
+        // ==============================
+        document.querySelectorAll('.reveal-words').forEach(el => {
+            const text = el.textContent.trim();
+            el.textContent = '';
+            text.split(' ').forEach((word, i) => {
+                const outer = document.createElement('span');
+                outer.className = 'word';
+                const inner = document.createElement('span');
+                inner.className = 'word-inner';
+                inner.style.transitionDelay = `${i * 0.05}s`;
+                inner.textContent = word;
+                outer.appendChild(inner);
+                el.appendChild(outer);
+            });
+        });
+
+        // ==============================
+        // 5. COUNTUP ANIMATION
+        // ==============================
+        function animateCountUp(el) {
+            const target = parseInt(el.dataset.target);
+            const suffix = target === 0 ? '' : '+';
+            const duration = 1500;
+            const start = performance.now();
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                el.textContent = current.toLocaleString() + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // ==============================
+        // 6. SCROLL OBSERVER (fade-in, countup, stagger, reveal-words)
+        // ==============================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Stagger children
+                    entry.target.querySelectorAll('.stagger-group').forEach(group => {
+                        group.querySelectorAll('.stagger-child').forEach((child, i) => {
+                            setTimeout(() => child.classList.add('visible'), i * 50);
+                        });
+                    });
+
+                    // Word reveals
+                    entry.target.querySelectorAll('.reveal-words').forEach(el => {
+                        el.classList.add('revealed');
+                    });
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Dedicated stats observer (fires independently)
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.stat-number').forEach(el => {
+                        if (!el.dataset.counted) {
+                            el.dataset.counted = 'true';
+                            animateCountUp(el);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.8 });
+        document.querySelectorAll('.stats-trigger').forEach(el => statsObserver.observe(el));
+
+        // ==============================
+        // 7. MOBILE MENU
+        // ==============================
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // ==============================
+        // 8. ACTIVE NAV ON SCROLL
+        // ==============================
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-40% 0px -60% 0px' });
+        sections.forEach(section => sectionObserver.observe(section));
+    </script>
+
+</body>
+</html>
